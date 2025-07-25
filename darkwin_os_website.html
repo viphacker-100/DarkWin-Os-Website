@@ -1,0 +1,1661 @@
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkWin OS - Educational Cybersecurity Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d1b69 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00ff88;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e0e6ed;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff88;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+            transform: translateX(-50%);
+            z-index: -1;
+            animation: heroGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-icons {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+        }
+
+        .floating-icons .icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-icons .icon:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .floating-icons .icon:nth-child(2) { left: 35%; animation-delay: 1s; }
+        .floating-icons .icon:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .floating-icons .icon:nth-child(4) { left: 65%; animation-delay: 3s; }
+        .floating-icons .icon:nth-child(5) { left: 80%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin: 2rem 0 1rem 0;
+            background: linear-gradient(45deg, #00ff88, #0088ff, #ff0088, #00ff88);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            animation: gradientShift 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes textGlow {
+            from { filter: brightness(1) drop-shadow(0 0 10px rgba(0, 255, 136, 0.3)); }
+            to { filter: brightness(1.2) drop-shadow(0 0 20px rgba(0, 255, 136, 0.6)); }
+        }
+
+        .typing-effect {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #0088ff;
+            min-height: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #e0e6ed;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .cta-button.primary:hover {
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.5);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #00ff88;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(26, 26, 58, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .feature-card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Tools Section */
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tools-category {
+            background: rgba(26, 26, 58, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .tools-category h3 {
+            color: #0088ff;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #0088ff;
+            padding-bottom: 0.5rem;
+        }
+
+        .tools-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .tools-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .tools-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .tools-list::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 3px;
+        }
+
+        .tools-list ol {
+            margin-left: 1rem;
+        }
+
+        .tools-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* System Requirements */
+        .requirements {
+            background: rgba(45, 27, 105, 0.3);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 136, 0.5);
+            margin: 2rem 0;
+        }
+
+        .requirements h3 {
+            color: #ff0088;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .req-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .req-item strong {
+            color: #00ff88;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Login Info */
+        .login-info {
+            background: rgba(255, 0, 136, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #ff0088;
+            margin: 2rem 0;
+        }
+
+        .login-info h3 {
+            color: #ff0088;
+            margin-bottom: 1rem;
+        }
+
+        .login-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .login-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 35, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 2px solid #00ff88;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Educational Warning */
+        .warning-banner {
+            background: linear-gradient(45deg, #ff4444, #ff6666);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+            animation: warning-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes warning-pulse {
+            from { box-shadow: 0 0 10px rgba(255, 68, 68, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
+        }
+
+        /* New styles for requirements table */
+        .req-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .req-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .req-table th, .req-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .req-table th {
+            background-color: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .req-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .req-extra {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .req-supported, .req-tips {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .req-supported h4, .req-tips h4 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .req-supported ul, .req-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .req-supported li, .req-tips li {
+            margin-bottom: 0.5rem;
+            color: #e0e6ed;
+            font-size: 0.9rem;
+        }
+
+        .req-supported li strong, .req-tips li strong {
+            color: #00ff88;
+        }
+
+        .req-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Version selector styles */
+        .version-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .version-selector label {
+            color: #00ff88;
+        }
+        .version-selector select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            background: #181830;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        /* Video tutorial styles */
+        .video-tutorial {
+            margin-top: 2rem;
+            background: rgba(0, 136, 255, 0.08);
+            border: 2px solid #0088ff;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .video-tutorial h3 {
+            color: #0088ff;
+            margin-bottom: 1rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,136,255,0.15);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        /* Dark/Light mode styles */
+        body.light-mode {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e6ed 50%, #cfd8dc 100%);
+            color: #181830;
+        }
+        body.light-mode .header {
+            background: rgba(255,255,255,0.95);
+            border-bottom: 2px solid #0088ff;
+        }
+        body.light-mode .logo {
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.light-mode .section-title {
+            color: #0088ff;
+        }
+        body.light-mode .requirements, body.light-mode .download-card, body.light-mode .feature-card, body.light-mode .tools-category, body.light-mode .contact-card {
+            background: rgba(255,255,255,0.9);
+            color: #181830;
+            border-color: #0088ff;
+        }
+        body.light-mode .req-supported, body.light-mode .req-tips {
+            background: rgba(0, 136, 255, 0.05);
+            border-color: #0088ff;
+        }
+        body.light-mode .download-btn.primary {
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            color: white;
+        }
+        body.light-mode .download-btn.secondary {
+            color: #0088ff;
+            border: 2px solid #0088ff;
+        }
+        body.light-mode .footer {
+            background: rgba(255,255,255,0.95);
+            border-top: 2px solid #0088ff;
+            color: #181830;
+        }
+        body.light-mode .footer a {
+            color: #0088ff;
+        }
+        body.light-mode .video-tutorial {
+            background: rgba(0, 255, 136, 0.08);
+            border-color: #00ff88;
+        }
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.7rem;
+            cursor: pointer;
+            margin-left: 1rem;
+            color: #00ff88;
+            transition: color 0.3s;
+        }
+        body.light-mode #theme-toggle {
+            color: #0088ff;
+        }
+        .req-checker {
+            background: rgba(0, 136, 255, 0.08);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.08);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .req-checker h4 {
+            color: #00ff88;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        #checker-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        #checker-form label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            color: #e0e6ed;
+        }
+        #checker-form input[type="number"],
+        #checker-form select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            background: #181830;
+            color: #00ff88;
+            font-weight: bold;
+            min-width: 90px;
+            transition: border 0.2s;
+        }
+        #checker-form input[type="number"]:focus,
+        #checker-form select:focus {
+            outline: none;
+            border: 2px solid #0088ff;
+        }
+        #checker-form button {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-left: 1rem;
+            box-shadow: 0 2px 8px rgba(0,255,136,0.08);
+        }
+        #checker-form button:hover {
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            transform: translateY(-2px) scale(1.04);
+        }
+        #checker-result {
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+            min-height: 1.5rem;
+        }
+        @media (max-width: 700px) {
+            .req-checker {
+                padding: 1rem 0.5rem;
+            }
+            #checker-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+            #checker-form button {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        .quickstart-card {
+            background: rgba(0, 255, 136, 0.07);
+            border: 2px solid #00ff88;
+            border-radius: 18px;
+            padding: 2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.08);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .quickstart-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.5rem;
+            color: #00ff88;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .quickstart-version {
+            color: #8888ff;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            font-weight: bold;
+        }
+        .quickstart-steps {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+        .quickstart-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.1rem;
+        }
+        .quickstart-step-number {
+            background: #00ff88;
+            color: #0f0f23;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,255,136,0.08);
+        }
+        .quickstart-step-content {
+            flex: 1;
+        }
+        .quickstart-step-content strong {
+            color: #00ff88;
+            font-size: 1.08rem;
+        }
+        .quickstart-download-row {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .quickstart-download-row label {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        .quickstart-download-row select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            background: #181830;
+            color: #00ff88;
+            font-weight: bold;
+        }
+        .quickstart-download-row a.download-btn {
+            margin-left: 0;
+        }
+        .quickstart-download-row a {
+            color: #0088ff;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+        .quickstart-download-row a:hover {
+            color: #00ff88;
+        }
+        .security-card {
+            background: rgba(255, 0, 136, 0.07);
+            border: 2px solid #ff0088;
+            border-radius: 18px;
+            padding: 2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(255,0,136,0.08);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .security-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.4rem;
+            color: #ff0088;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .security-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .security-list li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 1.05rem;
+        }
+        .security-list li strong {
+            color: #ff0088;
+        }
+        @media (max-width: 700px) {
+            .quickstart-card, .security-card {
+                padding: 1rem 0.5rem;
+            }
+            .quickstart-download-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7rem;
+            }
+        }
+        .login-info-pro {
+            background: linear-gradient(135deg, rgba(255,0,136,0.10), rgba(136,0,255,0.10));
+            border: 2.5px solid #ff0088;
+            border-radius: 18px;
+            padding: 2.2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 24px rgba(255,0,136,0.10);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .login-info-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.4rem;
+            color: #ff0088;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        .login-info-grid {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .login-info-card {
+            background: rgba(20, 10, 30, 0.85);
+            border-radius: 12px;
+            padding: 1.3rem 1.2rem;
+            font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+            color: #fff;
+            min-width: 260px;
+            flex: 1 1 260px;
+            box-shadow: 0 2px 12px rgba(255,0,136,0.07);
+            transition: box-shadow 0.2s, transform 0.2s;
+            margin-bottom: 1.2rem;
+        }
+        .login-info-card a {
+            color: #00aaff;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .login-info-card a:hover {
+            color: #00ff88;
+        }
+        .login-info-card strong {
+            color: #ff0088;
+        }
+        .login-info-card:hover {
+            box-shadow: 0 6px 24px rgba(255,0,136,0.18);
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 900px) {
+            .login-info-grid {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+        }
+        .security-card-pro {
+            background: linear-gradient(135deg, rgba(255,0,136,0.10), rgba(136,0,255,0.10));
+            border: 2.5px solid #ff0088;
+            border-radius: 18px;
+            padding: 2.2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 24px rgba(255,0,136,0.10);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .security-header-pro {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.4rem;
+            color: #ff0088;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        .security-list-pro {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .security-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+        .security-icon-title {
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: bold;
+            color: #ff0088;
+            font-size: 1.08rem;
+        }
+        .security-icon-title span {
+            font-size: 1.5rem;
+            margin-right: 0.3rem;
+        }
+        .security-desc {
+            color: #e0e6ed;
+            font-size: 1.08rem;
+            line-height: 1.5;
+        }
+        @media (max-width: 700px) {
+            .security-row {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .security-icon-title {
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        ⚠️ EDUCATIONAL PROJECT ONLY - FOR CYBERSECURITY LEARNING PURPOSES ⚠️
+    </div>
+
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">DarkWin OS</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#tools">Tools</a>
+                <a href="#requirements">Requirements</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-animation">
+                        <div class="floating-icons">
+                            <span class="icon">🛡️</span>
+                            <span class="icon">🔍</span>
+                            <span class="icon">⚡</span>
+                            <span class="icon">🔧</span>
+                            <span class="icon">💻</span>
+                        </div>
+                    </div>
+                    <h1>DarkWin OS</h1>
+                    <div class="typing-effect">
+                        <span id="typing-text">Advanced Penetration Testing Operating System</span>
+                    </div>
+                    <p>Modified Windows 10 Pro with 100+ Security Tools for Beginners and Professionals</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Security Tools</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">22</span>
+                            <span class="stat-label">RAT Tools</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">22</span>
+                            <span class="stat-label">Ransomware Samples</span>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#features" class="cta-button primary">Explore Features</a>
+                        <a href="#download" class="cta-button secondary">Download Guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">About DarkWin OS</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>🛡️ Educational Platform</h3>
+                        <p><strong>DarkWin</strong> is a modified version of Windows 10 Pro, based on Windows 10, specifically designed for cybersecurity education and penetration testing learning. <br><br><strong>Project Founder & Maintainer:</strong> VIPHACKER.100 (Aryan Ahirwar)<br><strong>Website:</strong> <a href="https://viphacker100.com" target="_blank" rel="noopener">https://viphacker100.com</a></p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔧 100+ Security Tools</h3>
+                        <p>Comprehensive collection of penetration testing tools, vulnerability scanners, network analyzers, and forensic utilities. <br><strong>Great OS for Penetration Testing</strong>—contains over 100 security tools for hackers. Made for beginners and professional hackers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Ready to Use</h3>
+                        <p>Pre-configured environment with all tools installed and ready to use. No complex setup required—boot and start learning cybersecurity immediately.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📚 Learning Focused</h3>
+                        <p>Designed specifically for educational purposes to help students and professionals learn ethical hacking, penetration testing, and cybersecurity fundamentals.</p>
+                    </div>
+                </div>
+                <div class="login-info-pro">
+                    <div class="login-info-header">🔑 Default Login Information</div>
+                    <div class="login-info-grid">
+                        <div class="login-info-card">
+                            <strong>DarkWin User:</strong><br>
+                            Username: Darwin <b>OR</b> DARKWIN<br>
+                            Password: <b>darkwin</b>
+                        </div>
+                        <div class="login-info-card">
+                            <strong>Acunetix Pro:</strong><br>
+                            LOGIN URL: <a href="https://localhost:3443/" target="_blank" rel="noopener">https://localhost:3443/</a><br>
+                            User: viphacker.100@hotmail.com<br>
+                            Password: <b>#VIPHACKER100#</b>
+                        </div>
+                        <div class="login-info-card">
+                            <strong>Tool Passwords:</strong><br>
+                            All tool passwords are available in the Tool Folder and Start Menu.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section id="requirements" class="section">
+            <div class="container">
+                <h2 class="section-title">System Requirements</h2>
+                <div class="requirements">
+                    <div class="req-table-wrapper">
+                        <table class="req-table">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Minimum</th>
+                                    <th>Recommended</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="req-icon">🖥️</span> Processor</td>
+                                    <td>2.5 GHz Dual Core</td>
+                                    <td>3.0+ GHz Quad Core</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">💾</span> RAM</td>
+                                    <td>4 GB</td>
+                                    <td>8 GB or more</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">🗄️</span> Storage</td>
+                                    <td>70 GB SSD</td>
+                                    <td>120 GB SSD/NVMe</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">🎮</span> GPU</td>
+                                    <td>Integrated</td>
+                                    <td>Dedicated (2GB+)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">🖥️</span> Display</td>
+                                    <td>1366x768</td>
+                                    <td>1920x1080+</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">🌐</span> Network</td>
+                                    <td>Ethernet/WiFi</td>
+                                    <td>Ethernet, Internet</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">⚙️</span> Virtualization</td>
+                                    <td>VT-x/AMD-V support</td>
+                                    <td>VT-x/AMD-V enabled</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="req-icon">🔢</span> Platform</td>
+                                    <td>64-bit</td>
+                                    <td>64-bit</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    <div class="req-extra">
+                        <div class="req-supported">
+                            <h4>Supported Platforms:</h4>
+                            <ul>
+                                <li>VMware Workstation/Player, VirtualBox, Hyper-V</li>
+                                <li>ISO & OVA available</li>
+                                <li>UEFI & Legacy BIOS supported</li>
+                            </ul>
+                        </div>
+                        <div class="req-tips">
+                            <h4>Tips:</h4>
+                            <ul>
+                                <li>Use SSD for best performance</li>
+                                <li>Take VM snapshots before testing</li>
+                                <li>Internet required for some tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="req-checker">
+                        <h4>🔎 Interactive Requirements Checker</h4>
+                        <form id="checker-form">
+                            <label>Processor (GHz): <input type="number" step="0.1" min="0" id="cpu-input" required></label>
+                            <label>RAM (GB): <input type="number" step="1" min="0" id="ram-input" required></label>
+                            <label>Storage (GB): <input type="number" step="1" min="0" id="storage-input" required></label>
+                            <label>GPU: 
+                                <select id="gpu-input" required>
+                                    <option value="integrated">Integrated</option>
+                                    <option value="dedicated">Dedicated (2GB+)</option>
+                                </select>
+                            </label>
+                            <button type="submit">Check My System</button>
+                        </form>
+                        <div id="checker-result"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="section">
+            <div class="container">
+                <h2 class="section-title">Security Tools Arsenal</h2>
+                <div class="tools-container">
+                    <div class="tools-category">
+                        <h3>🔍 Core Security Tools</h3>
+                        <div class="tools-list">
+                            <ul>
+                                <li>7DataRecoverySuitePortable.exe</li>
+                                <li>7-zip</li>
+                                <li>Acronis CyberProtect.exe</li>
+                                <li>Acunetix Premium Plus OnPremise with API Discovery</li>
+                                <li>advanced_ip_scanner.exe</li>
+                                <li>advanced_port_scanner.exe</li>
+                                <li>Agile.Net Advanced Obfuscation</li>
+                                <li>aida64.exe</li>
+                                <li>anyburn</li>
+                                <li>AnyDesk.exe</li>
+                                <li>AomeiBackupper.exe</li>
+                                <li>AomeiPartitionAssistant.exe</li>
+                                <li>autohotkey</li>
+                                <li>avira_pc_cleaner_en.exe</li>
+                                <li>BatExpert.exe</li>
+                                <li>BurnInTest 8.1.exe</li>
+                                <li>BurnInTest.exe</li>
+                                <li>burp suite pro</li>
+                                <li>chrome.exe</li>
+                                <li>CyberTriage Standard Pro</li>
+                                <li>debut.exe</li>
+                                <li>Defraggler64.exe</li>
+                                <li>dirbuster</li>
+                                <li>DiskGenius.exe</li>
+                                <li>DiskInfo64.exe</li>
+                                <li>Dism++x64.exe</li>
+                                <li>DriverBooster.exe</li>
+                                <li>DRW.exe</li>
+                                <li>EaseUS.Partition.exe</li>
+                                <li>EasyBCD.exe</li>
+                                <li>EasyUEFI.exe</li>
+                                <li>esetonlinescanner_enu.exe</li>
+                                <li>FastStone Capture</li>
+                                <li>FSCapture.exe</li>
+                                <li>gdbpro.exe</li>
+                                <li>git</li>
+                                <li>gpuz.exe</li>
+                                <li>gsmartcontrol.exe</li>
+                                <li>HDDLowLevelFormat.exe</li>
+                                <li>HDDScan.exe</li>
+                                <li>HDSentinel.exe</li>
+                                <li>HDTune.exe</li>
+                                <li>Hex-Rays IDA Professional</li>
+                                <li>HouseCall.exe</li>
+                                <li>HWMonitor_x64.exe</li>
+                                <li>iCareRecoveryProPortable.exe</li>
+                                <li>ImgBurn.exe</li>
+                                <li>Invicti Professional Edition</li>
+                                <li>lantern.exe</li>
+                                <li>LazesoftPro.exe</li>
+                                <li>LinkedIn Extream Premium</li>
+                                <li>MacriumReflect.exe</li>
+                                <li>Macrorit Partition.exe</li>
+                                <li>MobaXterm Professional Edition</li>
+                                <li>MyLanViewerPortable.exe</li>
+                                <li>n2fwizard.exe</li>
+                                <li>NamicSoft Portal Enterprise</li>
+                                <li>NamicSoft Scan Report Assistant Pro</li>
+                                <li>neat Downloader manager</li>
+                                <li>nmap</li>
+                                <li>notepad++</li>
+                                <li>notepad++.exe</li>
+                                <li>oCam.exe</li>
+                                <li>openssl</li>
+                                <li>PartRecovery.exe</li>
+                                <li>PicoTorrent.exe</li>
+                                <li>PUTTY.exe</li>
+                                <li>python</li>
+                                <li>R-DriveImage.exe</li>
+                                <li>RecoverKeys.exe</li>
+                                <li>recuva64.exe</li>
+                                <li>ResourceHacker.exe</li>
+                                <li>RStudioPortable.exe</li>
+                                <li>Speccy64.exe</li>
+                                <li>Stinger64.exe</li>
+                                <li>SystemExplorer.exe</li>
+                                <li>TeraCopyPortable.exe</li>
+                                <li>Themida Company License</li>
+                                <li>TrueImage2021.exe</li>
+                                <li>TxBENCH.exe</li>
+                                <li>uTorrent</li>
+                                <li>vaga scanner</li>
+                                <li>videopad.exe</li>
+                                <li>visual studio code</li>
+                                <li>Windows Installer.exe</li>
+                                <li>WingMan XSS Vulnerability Scanner Advanced</li>
+                                <li>WinMergeU.exe</li>
+                                <li>WinNTSetup_x64.exe</li>
+                                <li>winrar</li>
+                                <li>WinSCP.exe</li>
+                                <li>WinSnap.exe</li>
+                                <li>Wireshark</li>
+                                <li>WiseDataRecovery.exe</li>
+                                <li>Wondershare PDFelement Professional</li>
+                                <li>Wondershare Recoverit</li>
+                                <li>xRay Web Vulnerability Scanner Advanced</li>
+                                <li>cyberfox + hackbar</li>
+                                <li>UltraISO</li>
+                                <li>WinHTTrack</li>
+                                <li>VideoLAN</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tools-category">
+                        <h3>📱 Android RAT Collection</h3>
+                        <div class="tools-list">
+                            <ul>
+                                <li>Craxs RAT Russia Socket Optimized</li>
+                                <li>CraxsRat 7.4</li>
+                                <li>CraxsRat v6.5</li>
+                                <li>CraxsRat v6.6</li>
+                                <li>CraxsRat v6.7</li>
+                                <li>CraxsRats v4.9.5</li>
+                                <li>CraxsRat-V6.8-Cracked</li>
+                                <li>EagleSpy-V3-Unpacked</li>
+                                <li>EverSpy Ultimate – UNPACKED</li>
+                                <li>EverSpy V2 Crack Fixed Version</li>
+                                <li>G-700 RAT V5 VIP Cracked</li>
+                                <li>GTX-700 RAT V2.4</li>
+                                <li>IntroSpy-Unpacked-&-Cracked</li>
+                                <li>NiceTeacher By- VIPHACKER100</li>
+                                <li>SpyNote 7.3.1 UNPACKED-CLEAN</li>
+                                <li>SpyNote Black Edition V7.0</li>
+                                <li>Spyroid-VIP</li>
+                                <li>Tianxian RAT  Yellow Version</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tools-category">
+                        <h3>🖥️ Windows RAT Tools</h3>
+                        <div class="tools-list">
+                            <ul>
+                                <li>888 RAT</li>
+                                <li>KilerRat v10.0.0</li>
+                                <li>NanoCore</li>
+                                <li>njRAT v0.8d</li>
+                                <li>PRo NanoCore {HTTricks Reborn}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tools-category">
+                        <h3>🔐 Ransomware Samples (Educational)</h3>
+                        <div class="tools-list">
+                            <ul>
+                                <li>$uckyLocker</li>
+                                <li>7ev3n</li>
+                                <li>Annabelle</li>
+                                <li>BadRabbit</li>
+                                <li>Birele</li>
+                                <li>Cerber5</li>
+                                <li>CoronaVirus</li>
+                                <li>CryptoLocker</li>
+                                <li>CryptoWall</li>
+                                <li>Dharma</li>
+                                <li>Fantom</li>
+                                <li>GandCrab</li>
+                                <li>InfinityCrypt</li>
+                                <li>Krotten</li>
+                                <li>Locky.AZ</li>
+                                <li>NoMoreRansom</li>
+                                <li>NotPetya</li>
+                                <li>PetrWrap</li>
+                                <li>PolyRansom</li>
+                                <li>PowerPoint</li>
+                                <li>RedBoot</li>
+                                <li>RedEye</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <section id="download" class="section">
+            <div class="container">
+                <div class="quickstart-card">
+                    <div class="quickstart-header">🚀 Quick Start Guide</div>
+                    <div class="quickstart-version">v2025.1</div>
+                    <ol class="quickstart-steps">
+                        <li class="quickstart-step">
+                            <span class="quickstart-step-number">1</span>
+                            <div class="quickstart-step-content">
+                                <strong>System Preparation</strong><br>
+                                Ensure your system meets the minimum requirements: 4GB RAM, 70GB SSD, 2.5GHz processor
+                        </div>
+                        </li>
+                        <li class="quickstart-step">
+                            <span class="quickstart-step-number">2</span>
+                            <div class="quickstart-step-content">
+                                <strong>Virtual Machine Setup</strong><br>
+                                Recommended: Use VMware Workstation or VirtualBox for safe testing environment
+                                    </div>
+                        </li>
+                        <li class="quickstart-step">
+                            <span class="quickstart-step-number">3</span>
+                            <div class="quickstart-step-content">
+                                <strong>Installation</strong><br>
+                                Boot from ISO, follow standard Windows installation, default credentials provided
+                                </div>
+                        </li>
+                        <li class="quickstart-step">
+                            <span class="quickstart-step-number">4</span>
+                            <div class="quickstart-step-content">
+                                <strong>Tool Access</strong><br>
+                                All tools available via Start Menu and Desktop shortcuts. Check Tool folder for passwords
+                                    </div>
+                        </li>
+                    </ol>
+                    <div class="quickstart-download-row">
+                        <label for="version-select">Choose Version:</label>
+                        <select id="version-select">
+                            <option value="iso">ISO (Standard)</option>
+                            <option value="ova">OVA (VirtualBox/VMware)</option>
+                            <option value="zip">ZIP (Extractable)</option>
+                        </select>
+                        <a id="download-link" class="download-btn primary" href="https://example.com/darkwin-os.iso" target="_blank" rel="noopener">
+                            <span class="btn-icon">📥</span> Download
+                        </a>
+                                </div>
+                    <a href="#contact" class="download-btn secondary" style="margin-top:0.5rem;display:inline-block;">
+                        <span class="btn-icon">📧</span> Contact for Access
+                                </a>
+                            </div>
+                <div class="security-card-pro">
+                    <div class="security-header-pro">🔒 Security & Legal Notice</div>
+                    <div class="security-list-pro">
+                        <div class="security-row">
+                            <div class="security-icon-title"><span>⚠️</span> Educational Use Only:</div>
+                            <div class="security-desc">This OS is designed strictly for learning cybersecurity concepts in controlled environments.</div>
+                        </div>
+                        <div class="security-row">
+                            <div class="security-icon-title"><span>🎯</span> Authorized Testing:</div>
+                            <div class="security-desc">Only use penetration testing tools on systems you own or have explicit permission to test.</div>
+                        </div>
+                        <div class="security-row">
+                            <div class="security-icon-title"><span>💡</span> Responsible Disclosure:</div>
+                            <div class="security-desc">Follow responsible disclosure practices for any vulnerabilities discovered during learning.</div>
+                        </div>
+                        <div class="security-row">
+                            <div class="security-icon-title"><span>📚</span> Learning Purpose:</div>
+                            <div class="security-desc">Use this platform to understand security concepts, not to cause harm or unauthorized access.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-tutorial">
+                    <h3>🎬 Video Tutorial: Setting Up DarkWin OS</h3>
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="DarkWin OS Setup Tutorial" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tutorials" class="section">
+            <div class="container">
+                <h2 class="section-title">Learning Resources</h2>
+                <div class="tutorials-grid">
+                    <div class="tutorial-card">
+                        <div class="tutorial-icon">🎓</div>
+                        <h3>Beginner's Guide</h3>
+                        <p>Complete introduction to penetration testing fundamentals using DarkWin OS tools</p>
+                        <ul>
+                            <li>Network scanning with Nmap</li>
+                            <li>Web vulnerability testing with Burp Suite</li>
+                            <li>Basic forensic analysis</li>
+                            <li>Safe testing environments</li>
+                        </ul>
+                        <a href="#" class="tutorial-link">Start Learning →</a>
+                    </div>
+                    
+                    <div class="tutorial-card">
+                        <div class="tutorial-icon">⚔️</div>
+                        <h3>Advanced Techniques</h3>
+                        <p>Deep dive into professional penetration testing methodologies and advanced tool usage</p>
+                        <ul>
+                            <li>Advanced SQL injection testing</li>
+                            <li>Mobile security assessment</li>
+                            <li>Network traffic analysis</li>
+                            <li>Custom exploit development</li>
+                        </ul>
+                        <a href="#" class="tutorial-link">Explore Advanced →</a>
+                    </div>
+                    
+                    <div class="tutorial-card">
+                        <div class="tutorial-icon">🔬</div>
+                        <h3>Lab Exercises</h3>
+                        <p>Hands-on practical exercises designed to reinforce cybersecurity concepts safely</p>
+                        <ul>
+                            <li>Vulnerable web application testing</li>
+                            <li>Network intrusion simulation</li>
+                            <li>Digital forensics challenges</li>
+                            <li>Incident response scenarios</li>
+                        </ul>
+                        <a href="#" class="tutorial-link">Try Labs →</a>
+                    </div>
+                    
+                    <div class="tutorial-card">
+                        <div class="tutorial-icon">🏆</div>
+                        <h3>Certification Prep</h3>
+                        <p>Preparation materials for popular cybersecurity certifications using practical tools</p>
+                        <ul>
+                            <li>CEH exam preparation</li>
+                            <li>OSCP practical training</li>
+                            <li>GCIH hands-on practice</li>
+                            <li>Security+ lab scenarios</li>
+                        </ul>
+                        <a href="#" class="tutorial-link">Prepare Now →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p><strong>DarkWin OS</strong> - Educational Cybersecurity Project</p>
+                <p>Created and Maintained by <strong>VIPHACKER.100 (Aryan Ahirwar)</strong></p>
+                <p>Website: <a href="https://viphacker100.com" target="_blank" rel="noopener">https://viphacker100.com</a></p>
+            </div>
+            <p>&copy; 2025 DarkWin OS Educational Project. For Learning Purposes Only.</p>
+            <p><strong>⚠️ Disclaimer:</strong> This project is strictly for educational and research purposes. Use responsibly and in accordance with local laws.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 15, 35, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 15, 35, 0.95)';
+            }
+        });
+
+        // Add interactive effects to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Console warning for educational purposes
+        console.log('%c⚠️ EDUCATIONAL PROJECT WARNING ⚠️', 'color: #ff4444; font-size: 20px; font-weight: bold;');
+        console.log('%cThis is an educational cybersecurity project. Use responsibly and only for learning purposes.', 'color: #00ff88; font-size: 14px;');
+
+        // Interactive Requirements Checker
+        const checkerForm = document.getElementById('checker-form');
+        const checkerResult = document.getElementById('checker-result');
+        if (checkerForm) {
+            checkerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const cpu = parseFloat(document.getElementById('cpu-input').value);
+                const ram = parseInt(document.getElementById('ram-input').value);
+                const storage = parseInt(document.getElementById('storage-input').value);
+                const gpu = document.getElementById('gpu-input').value;
+                let result = '';
+                let meetsMin = true, meetsRec = true;
+                // Minimum checks
+                if (cpu < 2.5) meetsMin = false;
+                if (ram < 4) meetsMin = false;
+                if (storage < 70) meetsMin = false;
+                if (gpu !== 'integrated' && gpu !== 'dedicated') meetsMin = false;
+                // Recommended checks
+                if (cpu < 3.0) meetsRec = false;
+                if (ram < 8) meetsRec = false;
+                if (storage < 120) meetsRec = false;
+                if (gpu !== 'dedicated') meetsRec = false;
+                if (meetsRec) {
+                    result = '<span style="color:#00ff88;font-weight:bold;">Your system meets the <b>recommended</b> requirements! 🚀</span>';
+                } else if (meetsMin) {
+                    result = '<span style="color:#0088ff;font-weight:bold;">Your system meets the <b>minimum</b> requirements.</span>';
+                } else {
+                    result = '<span style="color:#ff0088;font-weight:bold;">Your system does <b>not</b> meet the minimum requirements.</span>';
+                }
+                checkerResult.innerHTML = result;
+            });
+        }
+
+        // Download version selector logic
+        const versionSelect = document.getElementById('version-select');
+        const downloadLink = document.getElementById('download-link');
+        if (versionSelect && downloadLink) {
+            versionSelect.addEventListener('change', function() {
+                let url = '';
+                if (this.value === 'iso') url = 'https://example.com/darkwin-os.iso';
+                if (this.value === 'ova') url = 'https://example.com/darkwin-os.ova';
+                if (this.value === 'zip') url = 'https://example.com/darkwin-os.zip';
+                downloadLink.href = url;
+            });
+        }
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                if(document.body.classList.contains('light-mode')) {
+                    themeToggle.textContent = '🌞';
+                } else {
+                    themeToggle.textContent = '🌙';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
