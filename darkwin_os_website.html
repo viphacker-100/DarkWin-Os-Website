@@ -17,6 +17,8 @@
             color: #e0e6ed;
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -57,6 +59,20 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e0e6ed;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu-toggle:hover {
+            color: #00ff88;
         }
 
         .nav-links a {
@@ -246,6 +262,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .cta-button.primary {
@@ -473,20 +491,170 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
             .nav-links {
                 display: none;
             }
             
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 35, 0.98);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-bottom: 2px solid #00ff88;
+                padding: 1rem 0;
+                gap: 1rem;
+                box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+            }
+            
+            .nav-links.active a {
+                padding: 0.5rem 2rem;
+                border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            }
+            
+            .nav-links.active a:last-child {
+                border-bottom: none;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                margin-top: 70px;
+                padding: 3rem 0;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
+                margin: 1rem 0 0.5rem 0;
             }
             
             .hero p {
                 font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .typing-effect {
+                font-size: 1.2rem;
+            }
+            
+            .hero-stats {
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .stat-item {
+                min-width: 100px;
+                padding: 0.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
             }
             
             .section-title {
                 font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .section {
+                padding: 2.5rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .floating-icons {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .typing-effect {
+                font-size: 1.1rem;
+            }
+            
+            .stat-item {
+                min-width: 80px;
+                padding: 0.6rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card {
+                padding: 1.2rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card p {
+                font-size: 0.9rem;
             }
         }
 
@@ -773,6 +941,68 @@
                 margin-left: 0;
                 width: 100%;
             }
+            
+            /* Download section mobile styles */
+            .quickstart-card {
+                padding: 1.5rem 1rem;
+                margin: 1rem 0;
+            }
+            
+            .quickstart-header {
+                font-size: 1.3rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .quickstart-step {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            
+            .quickstart-step-number {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+            
+            .quickstart-download-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .quickstart-download-row select {
+                width: 100%;
+            }
+            
+            /* Download buttons mobile layout */
+            .download-buttons-container {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+            
+            .download-buttons-container a {
+                width: 100% !important;
+                max-width: none !important;
+                font-size: 1rem !important;
+                padding: 1rem 1.5rem !important;
+            }
+            
+            .download-buttons-container a span {
+                font-size: 1.3rem !important;
+            }
+            
+            /* File info mobile */
+            .file-info-container {
+                padding: 0.8rem !important;
+            }
+            
+            .file-info-container p {
+                font-size: 0.85rem !important;
+                text-align: center;
+            }
         }
         .quickstart-card {
             background: rgba(0, 255, 136, 0.07);
@@ -1028,6 +1258,149 @@
             .security-icon-title {
                 min-width: unset;
             }
+            
+            /* Requirements table mobile */
+            .req-table-wrapper {
+                margin-bottom: 1rem;
+            }
+            
+            .req-table th, .req-table td {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .req-table th {
+                font-size: 0.9rem;
+            }
+            
+            /* Video tutorial mobile */
+            .video-tutorial {
+                margin-top: 2rem;
+            }
+            
+            .video-tutorial h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .video-wrapper {
+                position: relative;
+                width: 100%;
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            }
+            
+            .video-wrapper iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
+            /* Footer mobile */
+            .footer {
+                padding: 2rem 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .footer-section {
+                width: 100%;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .footer-section p, .footer-section a {
+                font-size: 0.9rem;
+            }
+            
+            /* Security card mobile */
+            .security-card-pro {
+                padding: 1.5rem 1rem;
+                margin: 1rem 0;
+            }
+            
+            .security-header-pro {
+                font-size: 1.2rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .security-icon-title {
+                font-size: 1rem;
+            }
+            
+            .security-desc {
+                font-size: 0.95rem;
+            }
+            
+            /* Login info mobile */
+            .login-info-grid {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .login-info-item {
+                padding: 1rem;
+            }
+            
+            .login-info-item h4 {
+                font-size: 1.1rem;
+            }
+            
+            .login-info-item p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small mobile optimizations */
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+            
+            .quickstart-header {
+                font-size: 1.1rem;
+            }
+            
+            .security-header-pro {
+                font-size: 1.1rem;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .warning-banner {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -1046,6 +1419,7 @@
                 <a href="#requirements">Requirements</a>
                 <a href="#contact">Contact</a>
             </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
             <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
         </nav>
     </header>
@@ -1410,54 +1784,82 @@
             </div>
         <section id="download" class="section">
             <div class="container">
+                <h2 class="section-title">Download DarkWin OS</h2>
+                
+                <!-- Main Download Card -->
                 <div class="quickstart-card">
-                    <div class="quickstart-header">🚀 Quick Start Guide</div>
-                    <div class="quickstart-version">v2025.1</div>
+                    <div class="quickstart-header">🚀 Download DarkWin OS ISO</div>
+                    <div class="quickstart-version">v2025.1 - Latest Release</div>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #e0e6ed;">
+                            <strong>Download via μTorrent Web</strong><br>
+                            Click the button below to start downloading the DarkWin OS ISO file
+                        </p>
+                        
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1rem;">
+                            <a href="https://utweb.rainberrytv.com/gui/share.html#link=magnet%3A%3Fxt%3Durn%3Abtih%3Ad013e054b9e86627939f6bd6773b4dd8dc3fd740%26dn%3DDarkWin.iso%26tr%3Dudp%253a%252f%252ftracker.openbittorrent.com%253a80%252fannounce%26tr%3Dudp%253a%252f%252ftracker.opentrackr.org%253a1337%252fannounce" 
+                               class="cta-button primary" 
+                               target="_blank" 
+                               rel="noopener"
+                               style="font-size: 1.3rem; padding: 1.2rem 2.5rem;">
+                                <span style="font-size: 1.5rem; margin-right: 0.5rem;">📥</span>
+                                Download via μTorrent Web
+                            </a>
+                            <a href="DarkWin.torrent" 
+                               class="cta-button secondary" 
+                               download
+                               style="font-size: 1.3rem; padding: 1.2rem 2.5rem;">
+                                <span style="font-size: 1.5rem; margin-right: 0.5rem;">🔗</span>
+                                Download Torrent File
+                            </a>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 255, 136, 0.1); border-radius: 10px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                            <p style="margin: 0; font-size: 0.9rem; color: #00ff88;">
+                                <strong>File Size:</strong> ~27.8 GB | <strong>Format:</strong> ISO | <strong>Platform:</strong> Windows 10 Pro
+                            </p>
+                        </div>
+                    </div>
+                    
                     <ol class="quickstart-steps">
                         <li class="quickstart-step">
                             <span class="quickstart-step-number">1</span>
                             <div class="quickstart-step-content">
-                                <strong>System Preparation</strong><br>
-                                Ensure your system meets the minimum requirements: 4GB RAM, 70GB SSD, 2.5GHz processor
-                        </div>
+                                <strong>Download the ISO</strong><br>
+                                Click the download button above to start downloading via μTorrent Web
+                            </div>
                         </li>
                         <li class="quickstart-step">
                             <span class="quickstart-step-number">2</span>
                             <div class="quickstart-step-content">
-                                <strong>Virtual Machine Setup</strong><br>
-                                Recommended: Use VMware Workstation or VirtualBox for safe testing environment
-                                    </div>
+                                <strong>System Preparation</strong><br>
+                                Ensure your system meets the minimum requirements: 4GB RAM, 70GB SSD, 2.5GHz processor
+                            </div>
                         </li>
                         <li class="quickstart-step">
                             <span class="quickstart-step-number">3</span>
                             <div class="quickstart-step-content">
-                                <strong>Installation</strong><br>
-                                Boot from ISO, follow standard Windows installation, default credentials provided
-                                </div>
+                                <strong>Virtual Machine Setup</strong><br>
+                                Recommended: Use VMware Workstation or VirtualBox for safe testing environment
+                            </div>
                         </li>
                         <li class="quickstart-step">
                             <span class="quickstart-step-number">4</span>
                             <div class="quickstart-step-content">
+                                <strong>Installation</strong><br>
+                                Boot from ISO, follow standard Windows installation, default credentials provided
+                            </div>
+                        </li>
+                        <li class="quickstart-step">
+                            <span class="quickstart-step-number">5</span>
+                            <div class="quickstart-step-content">
                                 <strong>Tool Access</strong><br>
                                 All tools available via Start Menu and Desktop shortcuts. Check Tool folder for passwords
-                                    </div>
+                            </div>
                         </li>
                     </ol>
-                    <div class="quickstart-download-row">
-                        <label for="version-select">Choose Version:</label>
-                        <select id="version-select">
-                            <option value="iso">ISO (Standard)</option>
-                            <option value="ova">OVA (VirtualBox/VMware)</option>
-                            <option value="zip">ZIP (Extractable)</option>
-                        </select>
-                        <a id="download-link" class="download-btn primary" href="https://example.com/darkwin-os.iso" target="_blank" rel="noopener">
-                            <span class="btn-icon">📥</span> Download
-                        </a>
-                                </div>
-                    <a href="#contact" class="download-btn secondary" style="margin-top:0.5rem;display:inline-block;">
-                        <span class="btn-icon">📧</span> Contact for Access
-                                </a>
-                            </div>
+                </div>
                 <div class="security-card-pro">
                     <div class="security-header-pro">🔒 Security & Legal Notice</div>
                     <div class="security-list-pro">
@@ -1468,25 +1870,27 @@
                         <div class="security-row">
                             <div class="security-icon-title"><span>🎯</span> Authorized Testing:</div>
                             <div class="security-desc">Only use penetration testing tools on systems you own or have explicit permission to test.</div>
-                        </div>
+                    </div>
                         <div class="security-row">
                             <div class="security-icon-title"><span>💡</span> Responsible Disclosure:</div>
                             <div class="security-desc">Follow responsible disclosure practices for any vulnerabilities discovered during learning.</div>
-                        </div>
+                            </div>
                         <div class="security-row">
                             <div class="security-icon-title"><span>📚</span> Learning Purpose:</div>
                             <div class="security-desc">Use this platform to understand security concepts, not to cause harm or unauthorized access.</div>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                            </div>
+                            </div>
                 <div class="video-tutorial">
                     <h3>🎬 Video Tutorial: Setting Up DarkWin OS</h3>
                     <div class="video-wrapper">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="DarkWin OS Setup Tutorial" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
         </section>
+
+        
 
         <section id="tutorials" class="section">
             <div class="container">
@@ -1632,18 +2036,7 @@
             });
         }
 
-        // Download version selector logic
-        const versionSelect = document.getElementById('version-select');
-        const downloadLink = document.getElementById('download-link');
-        if (versionSelect && downloadLink) {
-            versionSelect.addEventListener('change', function() {
-                let url = '';
-                if (this.value === 'iso') url = 'https://example.com/darkwin-os.iso';
-                if (this.value === 'ova') url = 'https://example.com/darkwin-os.ova';
-                if (this.value === 'zip') url = 'https://example.com/darkwin-os.zip';
-                downloadLink.href = url;
-            });
-        }
+
         // Dark/Light mode toggle
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
@@ -1653,6 +2046,37 @@
                     themeToggle.textContent = '🌞';
                 } else {
                     themeToggle.textContent = '🌙';
+                }
+            });
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuToggle && navLinks) {
+            mobileMenuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuToggle.textContent = '✕';
+                } else {
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav') && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
                 }
             });
         }
